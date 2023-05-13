@@ -1,5 +1,5 @@
 # Leej's Tracking expense-budget-system
-Stack: Next, Tailwind, Prisma, MUI, DB (TBD: MongoDB/NoSQL).
+Stack: Next, Tailwind, Prisma, MUI, DB (Not final: MongoDB/NoSQL).
 > Just a Personal/Passion project.
 
 **:key: Key Features:**
