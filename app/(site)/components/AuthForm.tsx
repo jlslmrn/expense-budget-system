@@ -5,7 +5,7 @@ import Input from "@/app/components/inputs/Input";
 import { useCallback, useState } from "react";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
 import AuthSocialButton from "./AuthSocialButton";
-import { BsGithub, BsGoogle } from "react-icons/bs";
+import { BsGoogle } from "react-icons/bs";
 
 type Variant = "LOGIN" | "REGISTER";
 
