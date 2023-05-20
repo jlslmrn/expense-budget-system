@@ -45,7 +45,7 @@ model Account {
 
 model Year {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  year        String   @unique
+  year        String
   currentYear Boolean  @default(value: true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -54,6 +54,8 @@ model Year {
   user   User   @relation(fields: [userId], references: [id])
 
   month Month[]
+
+  @@unique([year, userId])
 }
 
 model Month {

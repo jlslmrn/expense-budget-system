@@ -27,7 +27,18 @@ export async function POST(request: Request) {
       },
     });
 
-    return NextResponse.json(user);
+    if (user) {
+      await prisma.year.create({
+        data: {
+          year: new Date().getFullYear().toString(),
+          currentYear: true,
+          user: {
+            connect: { id: user.id },
+          },
+        },
+      });
+      return NextResponse.json(user);
+    }
   } catch (error: any) {
     console.log(error, "REGISTRATION ERROR");
 
