@@ -49,7 +49,6 @@ const Home = async () => {
     <>
       <div>Hello!</div>
       {/* <button onClick={() => signOut()}>Logout?</button> */}
-      //@ts-expect-error Server components
       <GetYear year={yearData} />
     </>
   );
