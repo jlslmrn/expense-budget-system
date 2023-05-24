@@ -1,11 +1,23 @@
 "use client";
 import * as React from "react";
+//tables
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+//month selection
+
+import FormControl from "@mui/material/FormControl";
+import NativeSelect from "@mui/material/NativeSelect";
+//icons
+import LogoutIcon from "@mui/icons-material/Logout";
+import EditIcon from "@mui/icons-material/Edit";
+import AddIcon from "@mui/icons-material/Add";
+//tooltip
+import Tooltip from "@mui/material/Tooltip";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -29,6 +41,25 @@ function createData(
   return { name, calories, fat, carbs, protein };
 }
 
+function createDataMonth(value: number, month: string) {
+  return { value, month };
+}
+
+const monthRow = [
+  createDataMonth(1, "January"),
+  createDataMonth(2, "February"),
+  createDataMonth(3, "March"),
+  createDataMonth(4, "April"),
+  createDataMonth(5, "May"),
+  createDataMonth(6, "June"),
+  createDataMonth(7, "July"),
+  createDataMonth(8, "August"),
+  createDataMonth(9, "September"),
+  createDataMonth(10, "October"),
+  createDataMonth(11, "November"),
+  createDataMonth(12, "December"),
+];
+
 const rows = [
   createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
   createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
@@ -36,6 +67,20 @@ const rows = [
   createData("Cupcake", 305, 3.7, 67, 4.3),
   createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
+
+const expensesRows = [
+  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+  createData("Eclair", 262, 16.0, 24, 6.0),
+  createData("Cupcake", 305, 3.7, 67, 4.3),
+  createData("Gingerbread", 356, 16.0, 49, 3.9),
+  createData("Gingerbread", 356, 16.0, 49, 3.9),
+  createData("Gingerbread", 356, 16.0, 49, 3.9),
+  createData("Gingerbread", 356, 16.0, 49, 3.9),
+  createData("Gingerbread", 356, 16.0, 49, 3.9),
+];
+
+const toolTipContent = "Maximum of two tables each month only.";
 
 const incomeRows = [createData("150000"), createData("5000")];
 
@@ -53,21 +98,57 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const MonthDummy = () => {
   return (
     <>
-      <nav className="border-4 border-gray-500">Hello</nav>
+      {/* NAVBAR*/}
+      <nav className=" flex justify-end px-5 py-2 bg-white sahdow">
+        <button className="flex items-center justify-center bg-gray-100 rounded-full px-3 py-1 my-2 shadow-lg text-xs">
+          <LogoutIcon className="w-4 h-4 mr-1" />
+          <span className="flex-grow">Logout</span>
+        </button>
+      </nav>
       {/* PARENT CONTENT */}
-      <main className="flex flex-col justify-center items-center min-h-screen w-full">
+      <main className="flex flex-col justify-center items-center min-h-screen w-full bg-gray-100">
         {/* MONTH SELECTION */}
-        <div className="w-full h-16 border-4 border-red-300 text-center">
-          THIS IS MONTH SELECTION
+        <div className="w-full h-16 border-red-300 text-center mt-3">
+          <div className="flex flex-row justify-center  border-gray-900">
+            <div className="mx-5">
+              <FormControl fullWidth>
+                <NativeSelect
+                  defaultValue={123}
+                  inputProps={{
+                    name: "age",
+                    id: "uncontrolled-native",
+                  }}
+                  className="w-full"
+                >
+                  <option value={123} disabled>
+                    Select a month
+                  </option>
+                  {monthRow.map((month) => (
+                    <option value={month.value}>{month.month}</option>
+                  ))}
+                </NativeSelect>
+              </FormControl>
+            </div>
+            <div className="flex flex-row">
+              <button className="flex items-center justify-center bg-gray-800 rounded-full px-3 py-1 my-2 shadow-lg text-xs">
+                <AddIcon className="w-4 h-4 mr-1" />
+                <span className="flex-grow">Table</span>
+              </button>
+              <Tooltip title={toolTipContent} className="mx-1">
+                <InfoOutlinedIcon className="w-4 h-10" />
+              </Tooltip>
+            </div>
+          </div>
         </div>
 
-        {/* FIRST CONTAINER */}
-        <div className="w-5/6 mt-8 border-gray-900 bg-white shadow sm:px-10 sm:rounded-lg">
-          {/* EDIT BUTTON */}
-          <div className="flex items-center justify-between text-center">
-            <p className="font-bold text-2xl mx-auto">May 25, 2023</p>
-            <button className="bg-black rounded-full px-5 my-3 text-white border-2 shadow-2xl">
-              Edit
+        {/* FIRST TABLE */}
+        <div className="w-5/6 mt-8 border-gray-900 bg-white shadow-lg sm:px-10 sm:rounded-lg">
+          <div className="flex items-center justify-between m-2">
+            <p className="font-bold text-2xl md:mx-auto">May 25, 2023</p>
+            {/* EDIT BUTTON */}
+            <button className="flex items-center justify-center bg-gray-100 rounded-full px-3 py-1 my-2 shadow-lg text-xs">
+              <EditIcon className="w-4 h-4 mr-1" />
+              <span className="flex-grow">Edit</span>
             </button>
           </div>
 
@@ -141,7 +222,7 @@ const MonthDummy = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row) => (
+                  {expensesRows.map((row) => (
                     <StyledTableRow key={row.name}>
                       <StyledTableCell
                         component="th"
@@ -173,21 +254,36 @@ const MonthDummy = () => {
         </div> */}
 
         {/* TABLE CONTENT */}
-        <div className="w-5/6 mt-8 border-4 border-gray-900">
-          <div className="flex flex-col md:flex-row text-center">
-            <div className="md:w-1/4 w-full md:mt-8 border-4 border-blue-500 overflow-auto">
+        <div className="w-5/6 mt-8 border-gray-900 bg-white shadow-lg sm:px-10 sm:rounded-lg">
+          <div className="flex items-center justify-between m-2">
+            <p className="font-bold text-2xl md:mx-auto">May 25, 2023</p>
+            {/* EDIT BUTTON */}
+            <button className="flex items-center justify-center bg-gray-100 rounded-full px-3 py-1 my-2 shadow-lg text-xs">
+              <EditIcon className="w-4 h-4 mr-1" />
+              <span className="flex-grow">Edit</span>
+            </button>
+          </div>
+
+          {/* TABLE CONTENT */}
+          <div className="flex flex-col md:flex-row text-center lg:border-2 shadow">
+            {/* FIRST CONTAINER */}
+            <div className="md:w-1/4 w-full border-2 lg:border-white">
               {/* Income */}
               Income
               <Table aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell>Description</StyledTableCell>
+                    <StyledTableCell align="center">Amount</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row) => (
+                  {incomeRows.map((row) => (
                     <StyledTableRow key={row.name}>
-                      <StyledTableCell component="th" scope="row">
+                      <StyledTableCell
+                        component="th"
+                        scope="row"
+                        align="center"
+                      >
                         {row.name}
                       </StyledTableCell>
                     </StyledTableRow>
@@ -195,22 +291,29 @@ const MonthDummy = () => {
                 </TableBody>
               </Table>
             </div>
-            <div className="md:w-3/4 w-full md:mt-8 border-4 border-blue-500">
+            {/* SECOND CONTAINER */}
+            <div className="md:w-3/4 w-full border-2 lg:border-white">
               Fixed Expenses
               <Table aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell>Description</StyledTableCell>
-                    <StyledTableCell align="right">Calories</StyledTableCell>
+                    <StyledTableCell align="center">
+                      Description
+                    </StyledTableCell>
+                    <StyledTableCell align="center">Amount</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {rows.map((row) => (
                     <StyledTableRow key={row.name}>
-                      <StyledTableCell component="th" scope="row">
+                      <StyledTableCell
+                        component="th"
+                        scope="row"
+                        align="center"
+                      >
                         {row.name}
                       </StyledTableCell>
-                      <StyledTableCell align="right">
+                      <StyledTableCell align="center">
                         {row.calories}
                       </StyledTableCell>
                     </StyledTableRow>
@@ -218,19 +321,26 @@ const MonthDummy = () => {
                 </TableBody>
               </Table>
             </div>
-            <div className="md:w-3/4 w-full md:mt-8 border-4 border-blue-500">
+            {/* THIRD CONTAINER */}
+            <div className="md:w-3/4 w-full border-2 lg:border-white">
               Additional Expenses
               <Table aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell>Description</StyledTableCell>
-                    <StyledTableCell align="center">Calories</StyledTableCell>
+                    <StyledTableCell align="center">
+                      Description
+                    </StyledTableCell>
+                    <StyledTableCell align="center">Amount</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row) => (
+                  {expensesRows.map((row) => (
                     <StyledTableRow key={row.name}>
-                      <StyledTableCell component="th" scope="row">
+                      <StyledTableCell
+                        component="th"
+                        scope="row"
+                        align="center"
+                      >
                         {row.name}
                       </StyledTableCell>
                       <StyledTableCell align="center">
@@ -243,7 +353,7 @@ const MonthDummy = () => {
             </div>
           </div>
           {/* TABLE TOTAL PRICE */}
-          <div className="w-auto h-[10%] border-4 border-orange-500">
+          <div className="w-auto h-[10%]  border-orange-500">
             <h1>Hello This is price</h1>
           </div>
         </div>
