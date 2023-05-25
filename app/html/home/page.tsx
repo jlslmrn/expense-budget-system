@@ -21,13 +21,23 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: "#2f2f2f",
     color: theme.palette.common.white,
     border: "none",
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 12,
     border: "none",
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    //border: "none",
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    //border: "none",
   },
 }));
 
@@ -83,17 +93,6 @@ const expensesRows = [
 const toolTipContent = "Maximum of two tables each month only.";
 
 const incomeRows = [createData("150000"), createData("5000")];
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.background.paper,
-    // border: "none",
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    // border: "none",
-  },
-}));
 
 const MonthDummy = () => {
   return (
@@ -241,8 +240,33 @@ const MonthDummy = () => {
             </div>
           </div>
           {/* TABLE TOTAL PRICE */}
-          <div className="w-auto h-[10%]  border-orange-500">
-            <h1>Hello This is price</h1>
+          <div className="flex flex-col lg:flex-row w-full h-full my-3">
+            <div className="flex flex-row lg:flex-grow mx-2">
+              <div className="mr-4 lg:mr-0">
+                <label className="font-bold mr-4 text-sm">Income:</label>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium text-sm my-1">
+                  &#8369; 200,000
+                </span>
+              </div>
+            </div>
+            <div className="flex flex-grow mx-2 ">
+              <div>
+                <label className="font-bold mr-4 text-sm">Expenses:</label>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium text-sm my-1">&#8369; 50,000</span>
+              </div>
+            </div>
+            <div className="flex flex-grow mx-2 lg:justify-end">
+              <div>
+                <label className="font-bold mr-3 text-lg">Savings:</label>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium text-lg">&#8369; 200,000</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -353,8 +377,33 @@ const MonthDummy = () => {
             </div>
           </div>
           {/* TABLE TOTAL PRICE */}
-          <div className="w-auto h-[10%]  border-orange-500">
-            <h1>Hello This is price</h1>
+          <div className="flex flex-col lg:flex-row w-full h-full my-3">
+            <div className="flex flex-row lg:flex-grow mx-2">
+              <div className="mr-4 lg:mr-0">
+                <label className="font-bold mr-4 text-sm">Income:</label>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium text-sm my-1">
+                  &#8369; 200,000
+                </span>
+              </div>
+            </div>
+            <div className="flex flex-grow mx-2 ">
+              <div>
+                <label className="font-bold mr-4 text-sm">Expenses:</label>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium text-sm my-1">&#8369; 50,000</span>
+              </div>
+            </div>
+            <div className="flex flex-grow mx-2 lg:justify-end">
+              <div>
+                <label className="font-bold mr-3 text-lg">Savings:</label>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium text-lg">&#8369; 200,000</span>
+              </div>
+            </div>
           </div>
         </div>
 
