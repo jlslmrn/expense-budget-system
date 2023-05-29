@@ -2,7 +2,8 @@
 
 Stack: Next, Tailwind, Prisma, MUI, DB (Not final: MongoDB/NoSQL).
 
-> Just a Personal/Passion project.
+> Just a Personal/Passion project. 
+> This system is only catered to my preference and needs.
 
 **:key: Key Features:**
 
