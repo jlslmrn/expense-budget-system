@@ -59,10 +59,10 @@ model Year {
 }
 
 model Month {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  dayOfMonth String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  monthName String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   yearId String @db.ObjectId
   year   Year   @relation(fields: [yearId], references: [id])
@@ -71,13 +71,13 @@ model Month {
 }
 
 model ExpenseContent {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  id            String          @id @default(auto()) @map("_id") @db.ObjectId
   date          DateTime
   netProfit     NetProfit
-  fixedExpenses Json
-  addExpenses   Json?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  fixedExpenses FixedExpenses[]
+  addExpenses   AddExpenses[]
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
 
   monthId String @db.ObjectId
   month   Month? @relation(fields: [monthId], references: [id])
@@ -86,4 +86,33 @@ model ExpenseContent {
 type NetProfit {
   salary    Float
   incentive Float? @default(value: 0)
+}
+
+type FixedExpenses {
+  description String
+  value       Float  @default(value: 0)
+}
+
+model AddExpenses {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  description String
+  value       Float  @default(value: 0)
+
+  expenseContentId String         @db.ObjectId
+  expenseContent   ExpenseContent @relation(fields: [expenseContentId], references: [id])
+}
+
+enum MONTHS {
+  January
+  February
+  March
+  April
+  May
+  June
+  July
+  August
+  September
+  October
+  November
+  December
 }
